@@ -27,6 +27,7 @@ export function ModalQuadros(props: NovoModalProps) {
 
             setNome(editarQuadro.quadro?.nome ? editarQuadro.quadro.nome : "");
         }
+
     }, [editarQuadro.editar]);
 
     function limparCamposAoFecharModal() {

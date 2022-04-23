@@ -1,11 +1,9 @@
-import {LoadingStyle} from "./styles";
+import { useContext } from "react";
+import { LoadingContext } from "../../contexts";
+import { LoadingStyle } from "./styles";
 
 export function Loading() {
-    return (
-        <div>
-            <LoadingStyle> 
-            </LoadingStyle>
-        </div>
-        
-    )
+    const { loading } = useContext(LoadingContext);
+
+    return loading ? <LoadingStyle /> : <div></div>;
 }

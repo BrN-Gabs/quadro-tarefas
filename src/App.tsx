@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { GlobalStyle } from "./styles/global";
-import { Header } from "./components/Header";
-import { ModalQuadros, ModalTarefas } from "./components/Modal";
 import Modal from "react-modal";
-import { ListagemTarefas } from "./components/ListagemTarefas";
-import { TarefasProvider, QuadrosProvider } from "./contexts";
-
+import { TarefasProvider, QuadrosProvider, LoadingProvider } from "./contexts";
+import {
+    Header,
+    ModalQuadros,
+    ModalTarefas,
+    ListagemTarefas,
+    Loading,
+} from "./components";
 
 Modal.setAppElement("#root");
 function App() {
@@ -31,26 +34,32 @@ function App() {
     }
 
     return (
-        <QuadrosProvider>
-            <TarefasProvider>
-                <div>
-                    <GlobalStyle />
-                    <Header
-                        abrirModalTarefa={abrirModalTarefa}
-                        abrirModalQuadros={abrirModalQuadros}
-                    />
-                    <ListagemTarefas abrirModal={abrirModalTarefa} abrirModalQuadro={abrirModalQuadros}/>
-                    <ModalTarefas
-                        visibleNovoModal={visibleModalTarefa}
-                        fecharModal={fecharModalTarefa}
-                    />
-                    <ModalQuadros
-                        visibleNovoModal={visibleModalQuadro}
-                        fecharModal={fecharModalQuadros}
-                    />
-                </div>
-            </TarefasProvider>
-        </QuadrosProvider>
+        <LoadingProvider>
+            <QuadrosProvider>
+                <TarefasProvider>
+                    <div>
+                        <Loading />
+                        <GlobalStyle />
+                        <Header
+                            abrirModalTarefa={abrirModalTarefa}
+                            abrirModalQuadros={abrirModalQuadros}
+                        />
+                        <ListagemTarefas
+                            abrirModal={abrirModalTarefa}
+                            abrirModalQuadro={abrirModalQuadros}
+                        />
+                        <ModalTarefas
+                            visibleNovoModal={visibleModalTarefa}
+                            fecharModal={fecharModalTarefa}
+                        />
+                        <ModalQuadros
+                            visibleNovoModal={visibleModalQuadro}
+                            fecharModal={fecharModalQuadros}
+                        />
+                    </div>
+                </TarefasProvider>
+            </QuadrosProvider>
+        </LoadingProvider>
     );
 }
 
